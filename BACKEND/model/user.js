@@ -20,6 +20,28 @@ const userSchema = new mongoose.Schema({
         required:[true, "Password is required"],
         minlength:[6, "Password must be at least 6 characters"]
     },
+    profilePicture:{
+        type:String,
+        default:null
+    },
+    learningGoals:[{
+        type:String,
+        trim:true
+    }],
+    totalLearningPaths:{
+        type:Number,
+        default:0
+    },
+    completedLearningPaths:{
+        type:Number,
+        default:0
+    },
+    isActive:{
+        type:Boolean,
+        default:true
+    }
+}, {
+    timestamps:true
 });
 
 const User = mongoose.model('User', userSchema);
