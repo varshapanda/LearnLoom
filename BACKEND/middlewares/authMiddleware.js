@@ -10,9 +10,9 @@ const authMiddleware = async (req, res, next) => {
         message: "No token provided, authorization denied",
       });
     }
-    const token = authHeader.startsWith("Bearer")
-      ? authHeader.slice(7)
-      : authHeader;
+    const token = authHeader.toLowerCase().startsWith("bearer ")
+      ? authHeader.slice(7).trim()
+      : authHeader.trim();
     if (!token) {
       return res.status(401).json({
         success: false,
@@ -45,10 +45,10 @@ const authMiddleware = async (req, res, next) => {
         message: "Token expired",
       });
     }
-    res.staus(500).json({
-        success:false,
-        message:'Server error in authentication'
-    })
+    res.status(500).json({
+      success: false,
+      message: "Server error in authentication",
+    });
   }
 };
 
